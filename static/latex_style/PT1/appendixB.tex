@@ -1,0 +1,37 @@
+% appendixB.tex
+% 2010/12/02, v1.20
+
+\chapter{amsthm commands}
+\label{amsthmcommands}
+
+The following code may be cut and pasted into your root file. Assuming you have included \verb"amsthm.sty", it will number your theorems, definitions, etc. in the same numbering sequence and by chapter, e.g.~Definition~4.1, Lemma~4.2, Lemma~4.3, Proposition~4.4, Corollary~4.5.
+
+If you prefer to have the elements numbered by section, e.g.~Definition~4.1.1, Lemma~4.1.2, Lemma~4.1.3, Proposition~4.1.4, Corollary~4.1.5, replace \verb"[chapter]" on line 2 with \verb"[section]".
+
+\begin{smallverbatim}
+
+  \theoremstyle{plain}% default
+  \newtheorem{theorem}{Theorem}[chapter]
+  \newtheorem{lemma}[theorem]{Lemma}
+  \newtheorem{corollary}[theorem]{Corollary}
+  \newtheorem{proposition}[theorem]{Proposition}
+  \newtheorem{conjecture}[theorem]{Conjecture}
+  \newtheorem{criterion}[theorem]{Criterion}
+  \newtheorem{algorithm}[theorem]{Algorithm}
+
+  \theoremstyle{definition}
+  \newtheorem{definition}[theorem]{Definition}
+  \newtheorem{condition}[theorem]{Condition}
+
+  \theoremstyle{remark}
+  \newtheorem{remark}[theorem]{Remark}
+  \newtheorem{note}[theorem]{Note}
+  \newtheorem{notation}[theorem]{Notation}
+  \newtheorem{claim}[theorem]{Claim}
+  \newtheorem{summary}[theorem]{Summary}
+  \newtheorem{acknowledgement}[theorem]{Acknowledgement}
+  \newtheorem{case}[theorem]{Case}
+  \newtheorem{conclusion}[theorem]{Conclusion}
+\end{smallverbatim}
+
+\endinput

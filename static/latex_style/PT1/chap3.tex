@@ -1,0 +1,238 @@
+% chap3.tex
+% 2010/12/02, v1.20
+
+\chapter{Mathematical solutions}
+\label{mathsol}
+
+\section{Why are we using amsthm.sty?}
+
+Many authors are already using this style file, so we have decided that rather than re-invent the wheel, we will make it part of our distribution. This means that the top of the root file would include the following lines:\\[0.5\baselineskip]
+\verb"  \documentclass{"\texttt{\cambridge}\verb"}"\\
+\verb"  \usepackage{amsmath}"\\
+\verb"  \usepackage{amsthm}"\\[0.5\baselineskip]
+As mentioned in Chapter~\ref{intro}, if your book does not use theorems, proofs, etc., then there is no need to include the amsthm package, but you do need to include these files to run this guide through \LaTeX. Note that if you are also using \verb"amsmath.sty", it \emph{must} precede \verb"amsthm.sty".
+
+The instructions for amsthm.sty are documentated separately in \texttt{amsthdoc.pdf}. We are including \texttt{amsthm.sty} and \texttt{amsthdoc.pdf} in this distribution for your convenience, but you may find more recent versions on the web. The following sections discuss the basic features, plus a few extras.
+
+To save time, you may cut and paste the code in Appendix~\ref{amsthmcommands} into your root file. This is a comprehensive (but not necessarily a complete) list of theorem-like environments you may wish to use.
+
+The \verb"amsthm" commands used in this guide are detailed in Appendix~\ref{rootfile}. They are simply a subset of commands from Appendix~\ref{amsthmcommands}; some illustrate unnumbered versions.
+
+Please note that theorems, definitions, remarks, etc.\ should be numbered in a single sequence, either by chapter (Chapter~4 would have Definition~4.1, Lemma~4.2, Lemma~4.3, Proposition~4.4, Corollary~4.5) or by section (Definition~4.1.1, Lemma~4.1.2, Lemma~4.1.3, Proposition~4.1.4, Corollary~4.1.5).
+
+To number these elements by chapter in this guide, we have used\linebreak \verb"\newtheorem{theorem}{Theorem}[chapter]". If you prefer to have the elements numbered by section, replace \verb"[chapter]" with \verb"[section]".
+
+\section{amsthm styles}
+
+If no \verb"\theoremstyle" command is given, the style used will be \texttt{plain}. To specify different styles, divide your \verb"\newtheorem" commands into groups and preface each group with the appropriate \verb"\theoremstyle".
+
+\subsection{amsthm \texttt{plain} style}
+
+The \texttt{plain} style is normally used for theorems, lemmas, corollaries, propositions, conjectures, criterion and algorithms. Authors are free to define their preferred numbering systems for these. The following example resets the theorem numbers for each chapter; lemmas follow in the same sequence. We have also requested that corollaries remain unnumbered by using the starred version:
+\begin{verbatim}
+  \theoremstyle{plain}% default
+  \newtheorem{theorem}{Theorem}[chapter]
+  \newtheorem{lemma}[theorem]{Lemma}
+  \newtheorem*{corollary}{Corollary}
+
+  \begin{theorem}
+    Let the scalar function\ldots
+  \end{theorem}
+  \begin{lemma}[Tranah]
+    The first-order free surface amplitudes\ldots
+  \end{lemma}
+  \begin{lemma}[\citealp{MenshEst}]
+    The exotic behaviours of Lagrangian\ldots
+  \end{lemma}
+  \begin{corollary}
+    Let $G$ be the free group on\ldots
+  \end{corollary}
+\end{verbatim}
+will produce the following output:
+  \begin{theorem}
+    Let the scalar function\ldots
+  \end{theorem}
+  \begin{lemma}[Tranah]
+    The first-order free surface amplitudes\ldots
+  \end{lemma}
+  \begin{lemma}[\citealp{MenshEst}]
+    The exotic behaviours of Lagrangian\ldots
+  \end{lemma}
+  \begin{corollary}
+    Let $G$ be the free group on\ldots
+  \end{corollary}
+%
+Note that Corollaries would normally be in the same numbering sequence as Theorems and Lemmas. If you'd prefer your theorems to be typeset in roman (though this is not recommended) use the amsthm \texttt{definition} style instead (see Section~\ref{amsdefn}).
+
+\subsection{amsthm \texttt{definition} style}
+\label{amsdefn}
+
+The \texttt{definition} style is normally used for definitions and conditions. Again, authors are free to define their preferred numbering systems for these. However, it is most usual to continue with the same numbering sequence as for Theorems, Lemmas, etc.:
+\begin{verbatim}
+  \theoremstyle{definition}
+  \newtheorem{definition}[theorem]{Definition}
+  \newtheorem{condition}[theorem]{Condition}
+
+  \begin{definition}
+    The series above is the Green function\ldots
+  \end{definition}
+  \begin{definition}
+    The correlation between the real and estimated flow\ldots
+  \end{definition}
+  \begin{condition}
+    The length (i.e. number of letters) of a word $w\in [s]^*$\ldots
+  \end{condition}
+\end{verbatim}
+will produce the following output:
+  \begin{definition}
+    The series above is the Green function\ldots
+  \end{definition}
+  \begin{definition}
+    The correlation between the real and estimated flow\ldots
+  \end{definition}
+  \begin{condition}
+    The length (i.e. number of letters) of a word $w\in [s]^*$\ldots
+  \end{condition}
+
+\subsection{amsthm \texttt{remark} style}
+The \texttt{remark} style is normally used for remarks, notes, notation, claims, summary, acknowledgements, cases, conclusions. However, in the \cambridge\ design, the remark and definition styles are the same. Authors who have already used the \texttt{remark} style may continue to do so; authors who are just starting out may choose to continue to use the \texttt{definition} style for remarks, notes, etc. Authors are free to define their preferred numbering systems for these.
+\begin{verbatim}
+  \theoremstyle{remark}
+  \newtheorem*{remark}{Remark}
+  \newtheorem*{case}{Case}
+
+  \begin{remark}
+    The absolute amplitude of a stratified wake\ldots
+  \end{remark}
+  \begin{case}
+    The profiles of quadratic fluctuations\ldots
+  \end{case}
+\end{verbatim}
+will produce the following output:
+  \begin{remark}
+    The absolute amplitude of a stratified wake\ldots
+  \end{remark}
+  \begin{case}
+    The profiles of quadratic fluctuations\ldots
+  \end{case}
+
+\section{Proofs}
+\label{proofs}
+
+The \verb"proof" environment is also part of the amsthm package, and provides a consistent format for proofs.
+ For example,
+\begin{verbatim}
+  \begin{proof}
+    Use $K_\lambda$ and $S_\lambda$ to translate combinators
+    into $\lambda$-terms. For the converse, translate
+    $\lambda x$ \ldots by [$x$] \ldots and use induction
+    and the lemma.
+  \end{proof}
+\end{verbatim}
+produces the following:
+  \begin{proof}
+    Use $K_\lambda$ and $S_\lambda$ to translate combinators
+    into $\lambda$-terms. For the converse, translate
+    $\lambda x$ \ldots by [$x$] \ldots and use induction
+    and the lemma.
+  \end{proof}
+
+\subsection{Changing the word `Proof' to something else}
+
+An optional argument allows you to substitute a different name for the standard `Proof'. To change the proof heading to read `Proof of the Pythagorean Theorem', key the following:
+\begin{verbatim}
+  \begin{proof}[Proof of the Pythagorean Theorem]
+    Start with a generic right-angled triangle\ldots
+  \end{proof}
+\end{verbatim}
+which produces:
+  \begin{proof}[Proof of the Pythagorean Theorem]
+    Start with a generic right-angled triangle\ldots
+  \end{proof}
+
+
+\subsection{Typesetting a proof without a \hbox{\qedsymbol}}
+
+This is not part of the amsthm package. Use the \verb"proof*" version. For example,
+\begin{verbatim}
+  \begin{proof*}
+    The apparent virtual mass coefficient\ldots
+  \end{proof*}
+\end{verbatim}
+produces the following:
+  \begin{proof*}
+    The apparent virtual mass coefficient\ldots
+  \end{proof*}
+
+\subsection{Placing the \hbox{\qedsymbol} after a displayed equation}
+
+To avoid the \qedsymbol\ dropping onto the following line at the end of a proof,
+\begin{verbatim}
+  \begin{proof}
+    \ldots and, as we are all aware,
+    \[
+       E=mc^2. \qedhere
+    \]
+  \end{proof}
+\end{verbatim}
+produces the following:
+  \begin{proof}
+    \ldots and, as we are all aware,
+    \[
+       E=mc^2. \qedhere
+    \]
+  \end{proof}
+When used with the amsmath package, version~2 or later, \verb"\qedhere" will position \qedsymbol\ flush right; with earlier versions, \qedsymbol\ will be spaced a quad away
+from the end of the text or display.
+
+If \verb"\qedhere" produces an error message in an equation, try using \verb"\mbox{\qedhere}" instead.
+
+\subsection{Placing the \hbox{\qedsymbol} after a displayed eqnarray}
+
+This is also not part of the amsthm package. To enable this, you need to used the starred version of \verb"proof", and add both \verb"\arrayqed" and \verb"\arrayqedhere", as shown in the following example:
+\begin{verbatim}
+  \begin{proof*}
+    The following equations prove the theorem:
+      \arrayqed
+        \begin{eqnarray}
+          \epsilon &=& -\frac{1}{2}U_0\frac{\mathrm{d}q'^2}
+                       {\mathrm{d}x}\nonumber\\
+                   &=& 10\nu\frac{q'^2}{\lambda^2}
+        \arrayqedhere
+        \end{eqnarray}
+  \end{proof*}
+\end{verbatim}
+produces the following:
+  \begin{proof*}
+    The following equations prove the theorem:
+      \arrayqed
+        \begin{eqnarray}
+          \epsilon &=& -\frac{1}{2}U_0\frac{\mathrm{d}q'^2}
+                       {\mathrm{d}x}\nonumber\\
+                   &=& 10\nu\frac{q'^2}{\lambda^2}
+        \arrayqedhere
+        \end{eqnarray}
+  \end{proof*}
+
+\section{Boxed equations}
+
+Important equations may be highlighted using the \verb"shadedbox" environment. You would not normally include text in such a box, but it is included here to demonstrate how to add a footnote. Euler might have included the following equation in his thesis:
+  \begin{shadedbox}
+    This is one way\footnotemark\ to define $e$:
+    \begin{equation}
+      e = \lim_{n\to\infty} \left( 1 + \frac{1}{n} \right)^n
+    \end{equation}
+  \end{shadedbox}
+  \footnotetext{There are others.}
+\noindent Here is the code for the above:
+\begin{verbatim}
+  \begin{shadedbox}
+    This is one way\footnotemark\ to define $e$:
+    \begin{equation}
+      e = \lim_{n\to\infty} \left( 1 + \frac{1}{n} \right)^n
+    \end{equation}
+  \end{shadedbox}
+  \footnotetext{There are others.}
+\end{verbatim}
+
+\endinput

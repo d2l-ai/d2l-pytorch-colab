@@ -1,0 +1,54 @@
+\def\cprime{$'$}
+\begin{thebibliography}{8}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname selectlanguage\endcsname\relax
+  \def\selectlanguage#1{\relax}\fi
+
+\bibitem[\protect\citename{Aizenman and Barsky, }1987]{AiBar87}
+Aizenman, M., and Barsky, D.~J. 1987.
+\newblock Sharpness of the phase transition in percolation models.
+\newblock {\em Comm. Math. Phys.}, {\bf 108}, 489--526.
+
+\bibitem[\protect\citename{Hammersley, }1957]{HamLower}
+Hammersley, J.~M. 1957.
+\newblock Percolation processes: {L}ower bounds for the critical probability.
+\newblock {\em Ann. Math. Statist.}, {\bf 28}, 790--795.
+
+\bibitem[\protect\citename{Hammersley, }1961]{HamAtomBond}
+Hammersley, J.~M. 1961.
+\newblock Comparison of atom and bond percolation processes.
+\newblock {\em J. Mathematical Phys.}, {\bf 2}, 728--733.
+
+\bibitem[\protect\citename{Hammersley and Mazzarino, }1994]{HamMaz94}
+Hammersley, J.~M., and Mazzarino, G. 1994.
+\newblock Properties of large {E}den clusters in the plane.
+\newblock {\em Combin. Probab. Comput.}, {\bf 3}, 471--505.
+
+\bibitem[\protect\citename{Kesten, }1990]{Kasymp}
+Kesten, H. 1990.
+\newblock Asymptotics in high dimensions for percolation.
+\newblock {Pages  219--240 of:} Grimmett, G.~R., and Welsh, D. J.~A. (eds),
+  {\em Disorder in Physical Systems: A Volume in Honour of John Hammersley}.
+\newblock Oxford University Press.
+
+\bibitem[\protect\citename{Menshikov, }1985]{MenshEst}
+Menshikov, M.~V. 1985.
+\newblock Estimates for percolation thresholds for lattices in {${\bf R}\sp
+  n$}.
+\newblock {\em Dokl. Akad. Nauk SSSR}, {\bf 284}, 36--39.
+
+\bibitem[\protect\citename{Menshikov {et~al.}, }1986]{MMS}
+Menshikov, M.~V., Molchanov, S.~A., and Sidorenko, A.~F. 1986.
+\newblock Percolation theory and some applications.
+\newblock {Pages  53--110 of:} {\em Probability theory. Mathematical
+  statistics. Theoretical cybernetics, Vol. 24 (Russian)}.
+\newblock Akad. Nauk SSSR Vsesoyuz. Inst. Nauchn. i Tekhn. Inform.
+\newblock Translated in {\em J. Soviet Math}. {\bf 42} (1988), no. 4,
+  1766--1810.
+
+\bibitem[\protect\citename{Vyssotsky {et~al.}, }1961]{VGFH}
+Vyssotsky, V.~A., Gordon, S.~B., Frisch, H.~L., and Hammersley, J.~M. 1961.
+\newblock Critical percolation probabilities (bond problem).
+\newblock {\em Phys. Rev.}, {\bf 123}, 1566--1567.
+
+\end{thebibliography}

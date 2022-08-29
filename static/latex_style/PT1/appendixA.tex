@@ -1,0 +1,60 @@
+% appendixA.tex
+% 2010/12/02, v1.20
+
+\chapter{Typesetting appendices}
+
+\section{Single-contributor books}
+\subsection{How to typeset one appendix}
+If you have just one appendix, say \verb"appendix.tex", you will want to generate a chapter head `Appendix' rather than `Appendix A'. Use \verb"\oneappendix" in the main file, as follows:
+\begin{verbatim}
+  \oneappendix
+  \include{appendix}
+\end{verbatim}
+
+\subsection{How to typeset several appendices}
+The coding used to generate the appendices in this guide is as follows:
+\begin{verbatim}
+  \appendix
+  \include{appendixA}
+  \include{appendixB}
+  \include{appendixC}
+\end{verbatim}
+
+\section{Multi-contributor books}
+
+\subsection{How to typeset one appendix}
+If you have just one appendix, it will be the next section head and you should include the following code at the end of your chapter:
+\begin{verbatim}
+  \oneappendix
+  \section{Appendix heading}
+  \subsection{Subheading}
+  \endappendix
+\end{verbatim}
+You will need to add \verb"\endappendix" if you have further section heads in this chapter.
+
+
+\subsection{How to typeset several appendices}
+The following code will genenerate Appendix~A and Appendix~B at the end of your chapter:
+\begin{verbatim}
+  \appendix
+  \section{Appendix heading}
+  \subsection{Subheading}
+    :
+  \section{Next appendix heading}
+  \subsection{Next subheading}
+  \endappendix
+\end{verbatim}
+Again, you will need to add \verb"\endappendix" if you have further section heads in this chapter.
+
+\section{Numbering systems}
+
+Equations in appendices will be numbered as follows:
+\begin{equation}
+  E=mc^2,
+\end{equation}
+and figure captions as follows:
+\begin{figure}[h]
+\caption{Similarity solutions}
+\end{figure}
+
+\endinput

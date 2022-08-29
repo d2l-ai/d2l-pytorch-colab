@@ -1,0 +1,115 @@
+% chap5.tex
+% 2010/12/02, v1.20
+
+\chapter{Indexes}
+\label{indexes}
+
+\section{Creating a single index using makeidx.sty}
+To generate a single index, normally a subject index, the commands would take the form:
+\begin{verbatim}
+  \index{diffraction}
+  \index{force!hydrodynamic}
+  \index{force!interactive}
+\end{verbatim}
+  %\index{diffraction}%
+  %\index{force!hydrodynamic}%
+  %\index{force!interactive}%
+The following commands are then required in the preamble:
+\begin{verbatim}
+  \usepackage{makeidx}
+  \makeindex
+\end{verbatim}
+and at the point you wish your index to appear,
+\begin{verbatim}
+  \printindex
+\end{verbatim}
+Run your book through \LaTeX\ enough times so that the labels, etc., are stable. Then execute the command:\\[0.5\baselineskip]
+\verb"  makeindex "\texttt{\cambridge guide}\\[0.5\baselineskip]
+To include the index, you need to run \LaTeX\ one more time.
+
+
+\section{Creating multiple indexes using multind.sty}
+This guide has been prepared using \verb"multind.sty". This style file redefines the \verb"\makeindex", \verb"\index" and \verb"\printindex" commands to deal with multiple indexes.
+
+Suppose you want to create an author index and a subject index. The entries should be in the text as usual, but take the following form:
+\begin{verbatim}
+  \index{authors}{Young, P.D.F.}
+  \index{authors}{Tranah, D.A.}
+  \index{authors}{Peterson, K.}
+  \index{subject}{diffraction}
+  \index{subject}{force!hydrodynamic}
+  \index{subject}{force!interactive}
+\end{verbatim}
+  \index{authors}{Young, P.D.F.}%
+  \index{authors}{Tranah, D.A.}%
+  \index{authors}{Peterson, K.}%
+  \index{subject}{diffraction}%
+  \index{subject}{force!hydrodynamic}%
+  \index{subject}{force!interactive}%
+In the preamble, you need to add the following lines:
+\begin{verbatim}
+  \usepackage{multind}\ProvidesPackage{multind}
+  \makeindex{authors}
+  \makeindex{subject}
+\end{verbatim}
+It is crucial to add the command \verb"\ProvidesPackage{multind}"; this will send a message to the class file to re-style the index into the \cambridge\ style. You will get a warning in your log file:
+\begin{verbatim}
+  LaTeX Warning: You have requested package `',
+                 but the package provides `multind'.
+\end{verbatim}
+which can be ignored. At the point where you wish your indexes to appear, you then need the commands:
+\begin{verbatim}
+  \printindex{authors}{Author index}
+  \printindex{subject}{Subject index}
+\end{verbatim}
+Run your book through \LaTeX\ enough times so that the labels, etc., are stable. Then execute the commands:
+\begin{verbatim}
+  makeindex authors
+  makeindex subject
+\end{verbatim}
+To include the indexes, you need to run \LaTeX\ one more time.
+
+\section{Creating multiple indexes using index.sty}
+
+This style file allows you to define new indexes. Suppose you want to create an author index as well as a normal subject index. The entries should be in the text as usual, but take the following form:
+\begin{verbatim}
+  \index[aut]{Young, P.D.F.}
+  \index[aut]{Tranah, D.A.}
+  \index[aut]{Peterson, K.}
+  \index{diffraction}
+  \index{force!hydrodynamic}
+  \index{force!interactive}
+\end{verbatim}
+  %\index[aut]{Young, P.D.F.}%
+  %\index[aut]{Tranah, D.A.}%
+  %\index[aut]{Peterson, K.}
+  %\index{diffraction}%
+  %\index{force!hydrodynamic}%
+  %\index{force!interactive}%
+To create the extra author index, you need to have the following lines in the preamble:
+\begin{verbatim}
+  \usepackage{index}
+  \newindex{aut}{adx}{and}{Author index}
+  \makeindex
+\end{verbatim}
+At the point where you wish your indexes to appear, use:
+\begin{verbatim}
+  \printindex[aut]
+  \printindex
+\end{verbatim}
+Run your book through \LaTeX\ enough times so that the labels, etc., are stable. Then execute the commands:\\[0.5\baselineskip]
+\verb"  makeindex -o "\texttt{\cambridge guide.and \cambridge guide.adx}\\
+\verb"  makeindex "\texttt{\cambridge guide}\\[0.5\baselineskip]
+To include the indexes, you need to run \LaTeX\ one more time.
+
+\subsection{Caution -- from the authors of index.sty}
+
+In order to implement \verb"index.sty", it's been necessary to modify a number of \LaTeX\ commands seemingly unrelated to indexing, namely, \verb"\@starttoc", \verb"\raggedbottom", \verb"\flushbottom", \verb"\addcontents", \verb"\markboth", and \verb"\markright". Naturally, this could cause incompatibilities between \texttt{index.sty} and any style files that either redefine these same commands or make specific assumptions about how they operate.
+
+The redefinition of \verb"\@starttoc" is particularly bad, since it introduces an incompatibility with the AMS document classes. This will be addressed soon.
+
+In the current implementation, \texttt{index.sty} uses one output stream for each index.  Since there are a limited number of output indexes, this means that there is a limit on the number of indexes you can have in a document.  There is more information on this in \verb"index.dtx" which is part of the \verb"index.sty" distribution.\\[\baselineskip]
+%
+\textit{For these reasons, whilst all care has been taken to deal with these changes in \cambridge.cls, if you do find incompatibilities with other files, please contact us at texline@cambridge.org with your source files, class and style files, and log file.}
+
+\endinput

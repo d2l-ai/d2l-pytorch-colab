@@ -1,0 +1,89 @@
+% chap1.tex
+% 2010/12/02, v1.20
+
+\chapter{Introduction}
+\label{intro}
+
+This guide is for authors who are preparing a book for Cambridge University Press using the \LaTeX\ document preparation system, and the \cambridge\ class file.
+
+The \LaTeX\ document preparation system is a special version of the \TeX\ typesetting program. \LaTeX\ adds to \TeX\ a collection of commands which simplify typesetting by allowing the author to concentrate on the logical structure of the document rather than its visual layout.
+
+\LaTeX\ provides a consistent and comprehensive document preparation interface. There are simple-to-use commands for generating a table of contents (toc), lists of figures and/or tables, and indexes. \LaTeX\ can automatically number list entries, equations, figures, tables, and footnotes, as well as parts, chapters, sections and subsections. Using this numbering system, bibliographic citations, page references and cross references to any other numbered entity (e.g. chapter, section, equation, figure, list entry) are quite straightforward.
+
+\LaTeX\ is a powerful tool for managing long and complex documents. In particular, partial processing enables long documents to be produced chapter by chapter without losing sequential information. The use of document classes allows a simple change of style to transform the appearance of your document.
+
+
+\section[The \LaTeXe\ book document class]{The \LaTeXeinsectionhead\ book document class}
+
+The \cambridge\ class file preserves the standard \LaTeX\ interface such that any document which can be produced using the standard \LaTeXe\ book class can also be produced with the \cambridge\ class. The one exception is tables -- captions will disappear; please refer to Section~\ref{tables}. However, the measure (i.e. width of text) is different from that for book, therefore linebreaks will change and long equations may need re-setting.
+
+
+\section{The \hbox{\cambridge} document class}
+
+The \cambridge\ design has been implemented as a \LaTeXe\ class file, and is based on the book class as discussed in the \LaTeX\ manual. Commands which differ from the standard \LaTeX\ interface, or which are provided in addition to the standard interface, are explained in this guide. This guide is \emph{not} a substitute for the \LaTeX\ manual itself.
+
+\section{Implementing the \hbox{\cambridge} class file}
+\label{usingcamb}
+
+Copy \cambridge.cls into the correct subdirectory on your system. The \cambridge\ document class is implemented as a complete document class, \emph{not} a document class option. To run this guide through \LaTeX, you need to include the following class and style files:\\[0.5\baselineskip]
+\verb"  \documentclass{"\texttt{\cambridge}\verb"}"\\
+\verb"  \usepackage{natbib}"\\
+\verb"  \usepackage[figuresright]{rotating}"\\
+\verb"  \usepackage{floatpag}"\\
+\verb"    \rotfloatpagestyle{empty}"\\
+\verb"  \usepackage{amsthm}"\\
+\verb"  \usepackage{multind}\ProvidesPackage{multind}"\\[0.5\baselineskip]
+%
+It may be that your book does not use graphics, references, rotation, theorems, or multiple indexes, in which case you simply need the first line. If you include \verb"multind.sty", you must also insert the command \verb"\ProvidesPackage{multind}". More recent style files include this information; it simply sends a message to the class file to re-style the index into the \cambridge\ style.
+
+In general, the following standard document class options should \emph{not} be used:
+ \begin{itemize}
+  \item \texttt{10pt}, \texttt{11pt}, \texttt{12pt};
+  \item \texttt{oneside}  (\texttt{twoside} is the default);
+  \item \texttt{fleqn}, \texttt{leqno}, \texttt{titlepage}, \texttt{twocolumn}.
+ \end{itemize}
+
+\section{Implementing the multi-contributor option}
+
+This option should be used where chapters have been written by different contributors. Please read Section~\ref{usingcamb} first; then implement the \verb"[multi]" option as follows:\\[0.5\baselineskip]
+\verb"  \documentclass[multi]{"\texttt{\cambridge}\verb"}"\\[0.5\baselineskip]
+Further details can be found in Section~\ref{multicontributor}.
+
+\section{Fonts}
+\label{fonts}
+
+The typefaces for the final typeset version of the \cambridge\ design are Times for the text, and Adobe Myriad Pro Condensed for the sans-serif elements, such as headings.
+
+It is a good idea to start working with these fonts straight away; you will get an idea of the final look of the text, and you will know the extent. If you cannot use the Adobe font for any reason, it is acceptable to default to the standard Times sans-serif.
+
+If your book is going to be typeset by Cambridge University Press, you are welcome to submit your files using Computer Modern; we will change the font. Authors supplying final PDFs must use Times.
+
+\subsection{Times}
+We recommend you use one of the following versions of Times:
+\begin{enumerate}
+\item mathptmx, available from:\\
+      http://www.ctan.org/tex-archive/fonts/psfonts/psnfss-source/mathptmx/
+\item txfonts, available from:\\
+      http://www.ctan.org/tex-archive/fonts/txfonts/
+\end{enumerate}
+Mathptmx changes the default roman font to Adobe Times, but does not support bold math characters.
+
+Txfonts does support bold math, but the kerning of subscripts and superscripts is not ideal. You must load txfonts \emph{after} amsthm.sty, otherwise you will get some `already defined' messages.\footnote{The reason we do not include times.sty as an option is because it mixes Computer Modern and Times fonts, and there is a clash between math and italic characters.}
+
+\subsection{Adobe Myriad Pro Condensed}
+
+This typeface is available to purchase in OpenType format from Adobe. If you have this typeface and are able to convert it to a \LaTeX-usable format, include it by adding the \verb"[prodtf]" option as follows:
+\begin{verbatim}
+  \documentclass[prodtf]{PT1}
+\end{verbatim}
+This will call in the style file myriad-pt1.sty, distributed with this package.
+
+\section{Submission of files}
+Please note that you must supply a PDF of your files so that the typesetters
+can check characters such as bold math italic. If you are providing final PDF files
+for printing, remember to embed all fonts as Type~1 fonts.
+
+\section{Make-up}
+This is a generic guide for many Cambridge designs. We have therefore not attempted to correct long lines, and there are occasions where pages may be a little long. The latter is due to the use of \verb"\begin{samepage}"\ldots \verb"\end{samepage}" where we are keeping text together for clarity. Authors should not include any page make-up commands, unless they are providing final PDFs for printing.
+
+\endinput

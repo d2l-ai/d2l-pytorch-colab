@@ -1,0 +1,162 @@
+% chap4.tex
+% 2010/12/02, v1.20
+
+\chapter{Reference and bibliography lists}
+
+\section{Automatic lists using Bib\TeXinsectionhead}
+
+We have chosen to use the natbib package because of its versatility.
+
+First, call in \texttt{natbib.sty}. If you are using the multi-contributor option, you will get an unnumbered section heading, otherwise it will be an unnumbered chapter heading.
+
+The bibliography file for this guide (\texttt{\cambridge guide.tex}) is called \texttt{percolation.bib}; the bibliography style is \texttt{cambridgeauthordate.bst}, so place the final two commands at the point where you would like the references to appear:
+%
+\begin{verbatim}
+    \usepackage{natbib}
+      :
+  % \renewcommand{\refname}{Bibliography}
+    \bibliography{percolation}
+    \bibliographystyle{cambridgeauthordate}
+\end{verbatim}
+%
+Note that if you uncomment the third line shown above, you can change the heading from `References' to `Bibliography'. Next, \LaTeX\ your book twice. Then run \textsc{Bib}\TeX\ by executing the command\\[0.5\baselineskip]
+\verb"  bibtex "\texttt{\cambridge guide}\\[0.5\baselineskip]
+Finally, run your book through \LaTeX\ twice again. This series of runs will generate a file called \texttt{\cambridge guide.bbl}, which will then be included by \verb"\bibliography{percolation}".
+
+Suppose you have cited 8 entries from the `percolation' database, e.g. \verb"\citealp{MenshEst}"; \verb"\citealp{Kasymp}"; \verb"\citealp{VGFH}"; \verb"\citealp{HamMaz94}"; \verb"\citealp{HamLower}"; \verb"\citealp{AiBar87}"; \verb"\citealp{MMS}"; and \verb"\citealp{HamAtomBond}"; the output will be just those 8~entries (see page~\pageref{refs}).%
+% add these entries to the list without referring to them
+\nocite{MenshEst}\nocite{Kasymp}\nocite{VGFH}\nocite{HamMaz94}\nocite{HamLower}\nocite{AiBar87}\nocite{MMS}\nocite{HamAtomBond}
+
+\section{Citations using natbib commands}
+Here are some of the basic citation commands available with the natbib package; there are many more if you cannot find what you need in this list. Bear in mind that Menshikov (1985) or (Menshikov, 1985) read best, depending on context.\\*[0.5\baselineskip]
+\begin{tabular}{@{}ll@{}}
+\verb"\citep{MenshEst}"
+    & $\rightarrow\enskip$\citep{MenshEst}\\
+\verb"\citep[see][p.$\,$34]{MenshEst}"
+    & $\rightarrow\enskip$\citep[see][p.$\,$34]{MenshEst}\\
+\verb"\citep[e.g.][]{MenshEst}"
+    & $\rightarrow\enskip$\citep[e.g.][]{MenshEst}\\
+\verb"\citep[Section~2.3]{MenshEst}"
+    & $\rightarrow\enskip$\citep[Section~2.3]{MenshEst}\\
+\verb"\citep{MenshEst, VGFH}"\\
+    & $\hspace{-70pt}\rightarrow\enskip$\citep{MenshEst, VGFH}\\
+\verb"\cite{MenshEst, VGFH}"\\
+    & $\hspace{-70pt}\rightarrow\enskip$\cite{MenshEst, VGFH}\\
+\verb"\citealt{MenshEst}"
+    & $\rightarrow\enskip$\citealt{MenshEst}\\
+\verb"\cite{MenshEst}"
+    & $\rightarrow\enskip$\cite{MenshEst}\\
+\verb"\citealp{MenshEst}"
+    & $\rightarrow\enskip$\citealp{MenshEst}\\
+\verb"\citeauthor{MenshEst}"
+    & $\rightarrow\enskip$\citeauthor{MenshEst}\\
+\verb"\citeyearpar{MenshEst}"
+    & $\rightarrow\enskip$\citeyearpar{MenshEst}\\
+\verb"\citeyear{MenshEst}"
+    & $\rightarrow\enskip$\citeyear{MenshEst}
+\end{tabular}
+
+
+\section{How to change reference entries from author--date to~numbers}
+\label{numberedbiblio}
+
+\LaTeX\ authors are used to \verb"\cite{...}" producing a reference such as~[11] in their manuscripts. If you prefer this style, it is an option within the natbib package:
+\begin{verbatim}
+  \usepackage[numbers]{natbib}
+\end{verbatim}
+
+\section{Keying in your reference list for an author--date system}
+\label{authordatebiblio}
+
+The entries need to be keyed as below. Note that if you uncomment the first line, you can change the heading from `References' to `Bibliography':
+%
+\begin{smallverbatim}
+% \renewcommand{\refname}{Bibliography}
+  \begin{thebibliography}{8}
+    \expandafter\ifx\csname natexlab\endcsname\relax
+      \def\natexlab#1{#1}\fi
+    \expandafter\ifx\csname selectlanguage\endcsname\relax
+      \def\selectlanguage#1{\relax}\fi
+
+  \bibitem[Aizenman and Barsky, 1987]{AiBar87}
+    Aizenman, M., and Barsky, D.~J. 1987.
+    Sharpness of the phase transition in percolation models.
+    {\em Comm. Math. Phys.}, {\bf 108}, 489--526.
+
+  \bibitem[Hammersley, 1957]{HamLower}
+    Hammersley, J.~M. 1957.
+    Percolation processes: Lower bounds for the critical probability.
+    {\em Ann. Math. Statist.}, {\bf 28}, 790--795.
+
+  \bibitem[Hammersley, 1961]{HamAtomBond}
+    Hammersley, J.~M. 1961.
+    Comparison of atom and bond percolation processes.
+    {\em J. Mathematical Phys.}, {\bf 2}, 728--733.
+
+  \bibitem[Hammersley and Mazzarino, 1994]{HamMaz94}
+    Hammersley, J.~M., and Mazzarino, G. 1994.
+    Properties of large Eden clusters in the plane.
+    {\em Combin. Probab. Comput.}, {\bf 3}, 471--505.
+
+  \bibitem[Kesten, 1990]{Kasymp}
+    Kesten, H. 1990.
+    Asymptotics in high dimensions for percolation.
+    Pages  219--240 of: Grimmett, G.~R., and Welsh, D.~J.~A. (eds),
+    {\em Disorder in Physical Systems: A Volume in Honour of John Hammersley}.
+    Oxford University Press.
+
+  \bibitem[Menshikov, 1985]{MenshEst}
+    Menshikov, M.~V. 1985.
+    Estimates for percolation thresholds for lattices in {${\bf R}\sp n$}.
+    {\em Dokl. Akad. Nauk SSSR}, {\bf 284}, 36--39.
+
+  \bibitem[Menshikov et~al., 1986]{MMS}
+    Menshikov, M.~V., Molchanov, S.~A., and Sidorenko, A.~F. 1986.
+    Percolation theory and some applications.
+    Pages  53--110 of: {\em Probability theory. Mathematical
+    statistics. Theoretical cybernetics, Vol. 24 (Russian)}.
+    Akad. Nauk SSSR Vsesoyuz. Inst. Nauchn. i Tekhn. Inform.
+    Translated in {\em J. Soviet Math}. {\bf 42} (1988), no. 4,
+    1766--1810.
+
+  \bibitem[Vyssotsky et~al., 1961]{VGFH}
+    Vyssotsky, V.~A., Gordon, S.~B., Frisch, H.~L., and Hammersley, J.~M. 1961.
+    Critical percolation probabilities (bond problem).
+    {\em Phys. Rev.}, {\bf 123}, 1566--1567.
+
+  \end{thebibliography}
+\end{smallverbatim}
+
+\section{Keying in your reference list for a numbered system}
+
+For this style, you may omit the optional square brace shown in Section~\ref{authordatebiblio}. Once again, if you uncomment the first line, you can change the heading from `References' to `Bibliography':
+%
+\begin{smallverbatim}
+% \renewcommand{\refname}{Bibliography}
+  \begin{thebibliography}{8}
+
+  \bibitem{AiBar87}
+    Aizenman, M., and Barsky, D.~J. 1987.
+    Sharpness of the phase transition in percolation models.
+    {\em Comm. Math. Phys.}, {\bf 108}, 489--526.
+
+  \bibitem{HamLower}
+    Hammersley, J.~M. 1957.
+    Percolation processes: Lower bounds for the critical probability.
+    {\em Ann. Math. Statist.}, {\bf 28}, 790--795.
+
+  \bibitem{HamAtomBond}
+    Hammersley, J.~M. 1961.
+    Comparison of atom and bond percolation processes.
+    {\em J. Mathematical Phys.}, {\bf 2}, 728--733.
+      :
+      :
+  \bibitem[Vyssotsky et~al., 1961]{VGFH}
+    Vyssotsky, V.~A., Gordon, S.~B., Frisch, H.~L., and Hammersley, J.~M. 1961.
+    Critical percolation probabilities (bond problem).
+    {\em Phys. Rev.}, {\bf 123}, 1566--1567.
+
+  \end{thebibliography}
+\end{smallverbatim}
+
+\endinput

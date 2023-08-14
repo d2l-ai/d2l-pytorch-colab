@@ -341,7 +341,7 @@
 
 \setlength\bibhang{1em}
 \renewenvironment{thebibliography}[1]{%
-  \bibsection\parindent \z@\bibpreamble\normalsize\list
+ \endappendix \bibsection\parindent \z@\bibpreamble\normalsize\list
    {\@biblabel{\arabic{NAT@ctr}}}{\@bibsetup{#1}%
     \setcounter{NAT@ctr}{0}}%
     \ifNAT@openbib
@@ -1028,7 +1028,8 @@
   \fi
 }
 \def\@schapter#1{%
- \ifAJW@addtoc
+    \endappendix% in case previous chapter contained appendices
+\ifAJW@addtoc
   \ifAJW@indentsty
    \ifdim\AJW@indent>\z@
     \addcontentsline{toc}{schapter}{\protect\numberline{\mbox{}}#1}
@@ -2066,7 +2067,8 @@
 \setlength\bibindent{1em}
 \newenvironment{thebibliography}[1]
      {\chapter*{\refname}%
-      \@mkboth{\refname}{\refname}%
+      \endappendix
+\@mkboth{\refname}{\refname}%
       \list{\@biblabel{\@arabic\c@enumiv}}%
            {\normalsize\settowidth\labelwidth{\@biblabel{#1}}%
             \leftmargin\labelwidth
@@ -2532,7 +2534,7 @@
 \def\fps@figure{tbp}
 \def\ftype@figure{1}
 \def\ext@figure{lof}
-\def\fnum@figure{\figurename\ \thefigure}
+\def\fnum@figure{Fig.\/ \thefigure}
 
 \def\figure{\let\@makecaption=\make@figure@caption
  \AJW@floatindent=\AJW@indent
@@ -2926,7 +2928,7 @@
     {\rightmark}\hfill}%
     \hspace*{-35pc}{\thin@rule}%
   }%
-  %\def\chaptermark##1{\markboth{##1}{##1}}%
+  \def\chaptermark##1{\markboth{##1}{##1}}%
   %\def\sectionmark##1{\markright{\ifnum \c@secnumdepth >\z@
   %  \thesection\enskip\fi ##1}}%
   \ifAJW@multisty

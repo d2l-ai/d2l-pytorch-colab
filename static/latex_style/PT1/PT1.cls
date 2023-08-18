@@ -1,9 +1,10 @@
 %%
-%% This is file 'PT1.cls'
+%% This is file 'PT1_dl2.cls'
 %% PT1 LaTeX2e document class
 %%
 %% copyright (c) 2010 ali woollatt
 %%   generated from cambridge7A.cls 2009/09/16, v2.00
+%% adapted by David Tranah to work with Dive into Deep Learning August 2023
 %%
 %% Bugs (in the case of unchanged files) should be reported to
 %% texline@cambridge.org
@@ -787,13 +788,20 @@
    \raisebox{0.5\baselineskip}[0\p@][0\p@]{\mbox{\hspace*{\AJW@indent}}%
     \begin{minipage}[t]{\AJW@headwidth}
     %
-    \ifAJW@appendix
+    %\ifAJW@oneappendix %%DAT changed to oneapppendix and added colon
+    %  \setbox\chapbox=\hbox{\huge\seriffont Appendix A:\enskip
+    %   \bfseries\textcolor{white}{\strut}#1\hspace*{1pc}}%
+    %  \else    %%DAT added next three lines
+    %    \ifAJW@appendix
+    %    {{\huge\seriffont Appendix \thechapter:}\enskip #1}%
+     \ifAJW@appendix
       \setbox\chapbox=\hbox{\huge\seriffont Appendix A\enskip
        \bfseries\textcolor{white}{\strut}#1\hspace*{1pc}}%
     \else
       \setbox\chapbox=\hbox{\huge\seriffont
         \bfseries\textcolor{white}\strut #1\hspace*{1pc}}%
     \fi
+     %\fi
     %
     \global\chapwidth\wd\chapbox
     \ifdim\wd\chapbox<\AJW@headwidth
@@ -805,17 +813,22 @@
       \ifAJW@oneappendix
         \raisebox{0pt}{\textcolor{white}{}}%
       \else
+        \ifAJW@appendix   %%DAT added this
+        \raisebox{0pt}{\textcolor{white}{\thechapter}}%  %%DAT deleted chapter #
+            \else   %%DAT added this line and next
         \raisebox{0pt}{\textcolor{white}{\thechapter}}%
-      \fi
+      \fi\fi
       }&\multicolumn{1}%
       {@{\hspace{0.5pc}}p{29pc}@{\hspace{0.5pc}}}%half pica space either side
         {\centering\huge\seriffont\bfseries
       \textcolor{white}{%
       \ifAJW@oneappendix
-        {{\huge\seriffont Appendix}\enskip #1}%
+        {{\huge\seriffont %Appendix:
+}\enskip #1}%
       \else
         \ifAJW@appendix
-        {{\huge\seriffont Appendix \thechapter}\enskip #1}%
+        {{\huge\seriffont %Appendix \thechapter:
+}\enskip #1}%
         \else
           {\huge\seriffont #1}%
         \fi
@@ -834,10 +847,12 @@
     \textcolor{white}{%
  %
     \ifAJW@oneappendix
-      {{\huge\seriffont\strut Appendix}\enskip\bfseries #1}%
+      {{\huge\seriffont\strut %Appendix: 
+}\enskip\bfseries #1}%  %%DAT added colon
     \else
        \ifAJW@appendix
-        {{\huge\seriffont\strut Appendix \thechapter\enskip\seriffont\bfseries #1}}%------------
+        {{\huge\seriffont\strut %Appendix \thechapter:
+\enskip\seriffont\bfseries #1}}%------------ %%DAT added colon
        \else
           {\huge\seriffont\bfseries\strut #1}%
        \fi
@@ -1799,12 +1814,12 @@
   \AJW@tocindent=60\p@
 %\fi
 % \def\numberline#1{\hbox to\@tempdima{#1\hfil}}
-\def\AJW@numberline#1{\hbox to 1.15\AJW@tocindent {{\appendixname\ #1\hfil}}}%1.15
-\def\AJW@nonumberline#1{\hbox to 56pt{{\appendixname\hfil}}}%56pt matches section heads
+\def\AJW@numberline#1{\hspace*{69pt}{{\appendixname\ #1\hfil}}}%changed to 69pt
+\def\AJW@nonumberline#1{\hspace*{56pt}{{\appendixname\ \hfil}}}%changed to 56pt matches section heads
 \ifAJW@indentsty \ifdim\AJW@indent>\z@
- \def\numberline#1{\hbox to\@tempdima{\hfil#1\hspace*{0.5em}}}
- \def\AJW@numberline#1{\hspace*{\@tempdima}%
-  \hbox to 1.15\AJW@tocindent {{\itshape \appendixname\ #1\hfil}}}
+\def\numberline#1{\hbox to\@tempdima{\hfil#1\hspace*{0.5em}}}
+\def\AJW@numberline#1{\hspace*{\@tempdima}%
+  \hspace*{69pt}{{\itshape \appendixname\ #1\hfil}}} %changed to 69pt
 \fi \fi
 %
 \newif\ifAJW@addtoc        \AJW@addtocfalse
